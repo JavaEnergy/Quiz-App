@@ -1,0 +1,41 @@
+.home {
+  margin: 32px 24px;
+}
+
+.quiz-list {
+  padding: 40px 0;
+}
+
+.list {
+  padding: 12px 0;
+  border-radius: 12px;
+  background-color: white;
+  margin-bottom: 12px;
+}
+
+.list a {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  color: #313e51;
+  text-decoration: none;
+}
+.list svg {
+  border-radius: 5px;
+  padding: 3px;
+  margin-left: 12px;
+}
+
+.html svg {
+  background-color: #fff1e9;
+}
+
+.css svg {
+  background-color: #e0fdef;
+}
+.js svg {
+  background-color: #ebf0ff;
+}
+.acc svg {
+  background-color: #f6e7ff;
+}
