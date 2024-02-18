@@ -1,0 +1,16 @@
+.background {
+  background-position: center;
+  height: 100vh;
+}
+
+.light-mode {
+  background-image: url("/src/assets/images/pattern-background-mobile-light.svg");
+  background-color: #f4f6fa;
+  color: #313e51;
+}
+
+.dark-mode {
+  background-image: url("/src/assets/images/pattern-background-mobile-dark.svg");
+  background-color: #313e51;
+  color: #fff;
+}

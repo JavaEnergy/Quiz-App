@@ -7,7 +7,6 @@ const Home = () => {
   const [quizzes, setQuizzes] = useState([]);
 
   useEffect(() => {
-    // Set the fetched data from the imported JSON file to the state
     setQuizzes(quizData.quizzes);
   }, []);
 
@@ -15,7 +14,7 @@ const Home = () => {
     <section className="home">
       <div className="text">
         <h1>
-          Welcome to the <br /> FrontEnd Quiz
+          Welcome to the <br /> <span>FrontEnd Quiz </span>
         </h1>
         <p>Pick a subject to get started.</p>
       </div>

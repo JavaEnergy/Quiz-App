@@ -1,3 +1,23 @@
+@font-face {
+  font-family: Rublik-300;
+  src: url(./assets/fonts/static/Rubik-Italic.ttf);
+}
+@font-face {
+  font-family: Rublik-400;
+  src: url(./assets/fonts/static/Rubik-Medium.ttf);
+}
+@font-face {
+  font-family: Rublik-500;
+  src: url(./assets/fonts/static/Rubik-Regular.ttf);
+}
+@font-face {
+  font-family: Rublik-var;
+  src: url(./assets/fonts/Rubik-VariableFont_wght.ttf);
+}
+@font-face {
+  font-family: Rublik-it;
+  src: url(./assets/fonts/Rubik-Italic-VariableFont_wght.ttf);
+}
 * {
   margin: 0;
   padding: 0;
