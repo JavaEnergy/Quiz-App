@@ -19,13 +19,15 @@
 .quiz-list {
   padding: 40px 0;
   font-family: Rublik-400;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
 .list {
   padding: 12px 0;
   border-radius: 12px;
   background-color: white;
-  margin-bottom: 12px;
 }
 
 .list a {
@@ -52,5 +54,21 @@
   background-color: #ebf0ff;
 }
 .acc svg {
+  background-color: #f6e7ff;
+}
+
+.dark-mode-p {
+  color: #abc1e1;
+}
+
+.dark-mode-div {
+  background-color: #3b4d66;
+  color: #ffffff;
+}
+
+.svg-bl {
+  background-color: #ebf0ff;
+}
+.svg-p {
   background-color: #f6e7ff;
 }
