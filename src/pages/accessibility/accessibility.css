@@ -1,0 +1,58 @@
+.quiz-page {
+  margin: 32px 24px;
+  font-family: Rublik-400;
+}
+
+.question-div {
+  display: flex;
+  flex-direction: column;
+}
+
+.quest-count {
+  font-family: Rublik-300;
+  font-size: 14px;
+  color: #626c7f;
+}
+
+.quest {
+  color: #313e51;
+  font-size: 20px;
+  padding: 12px 0 24px;
+}
+.answer input[type="radio"] {
+  visibility: hidden;
+}
+.answer {
+  padding: 23px 0;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  gap: 11px;
+}
+
+.answers {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.answer label {
+  background-color: #f4f6fa;
+  margin-left: 12px;
+  padding: 11px;
+}
+
+.answers button {
+  padding: 12px;
+  font-family: Rublik-400;
+  color: #ffffff;
+  border: none;
+  background-color: #a729f5;
+}
+
+.green {
+  border: 1px solid green;
+}
+.red {
+  border: 1px solid red;
+}

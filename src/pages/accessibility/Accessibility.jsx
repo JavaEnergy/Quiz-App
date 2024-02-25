@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { quizzes } from "../../../data.json";
+import "./accessibility.css";
 
 const Accessibility = () => {
   const accessibilityQuiz = quizzes.find(
@@ -34,35 +35,57 @@ const Accessibility = () => {
   const { question, options } = accessibilityQuiz.questions[currentQuestion];
 
   return (
-    <div>
-      <p>
-        Question {currentQuestion + 1} of {accessibilityQuiz.questions.length}
-      </p>
-      <p>{question}</p>
-      <ul>
-        {options.map((option, optionIndex) => (
-          <li key={optionIndex}>
-            <input
-              type="radio"
-              name="answer"
-              checked={selectedAnswer === optionIndex}
-              onChange={() => handleAnswerSelect(optionIndex)}
-            />
-            {option}
-            {/* Added feedback for selected answer */}
-            {isCorrect !== null && selectedAnswer === optionIndex && (
-              <span aria-live="polite">
-                {isCorrect ? "Correct!" : "Incorrect"}
-              </span>
-            )}
-          </li>
-        ))}
-      </ul>
-      <button onClick={handleNextQuestion} disabled={selectedAnswer === null}>
-        {currentQuestion === accessibilityQuiz.questions.length - 1
-          ? "View result"
-          : "Next question"}
-      </button>
+    <section className="quiz-page">
+      <div className="question-div">
+        <p className="quest-count">
+          Question {currentQuestion + 1} of {accessibilityQuiz.questions.length}
+        </p>
+        <p className="quest">{question}</p>{" "}
+      </div>
+      <div className="answers">
+        {options.map((option, optionIndex) => {
+          const isThisAnswerSelected = selectedAnswer === optionIndex;
+          const isThisAnswerCorrect =
+            isCorrect !== null &&
+            isThisAnswerSelected &&
+            option === accessibilityQuiz.questions[currentQuestion].answer;
+
+          return (
+            <div
+              key={`answer-${optionIndex}`}
+              className={`answer ${isThisAnswerSelected ? "selected" : ""} ${
+                isThisAnswerCorrect
+                  ? "green"
+                  : isThisAnswerSelected
+                  ? "red"
+                  : ""
+              }`}
+              onClick={() => handleAnswerSelect(optionIndex)}
+              aria-describedby={`answer-feedback-${optionIndex}`}
+            >
+              <label htmlFor={`answer-${optionIndex}`}>
+                {String.fromCharCode(65 + optionIndex)}
+              </label>
+              {option}
+              {isThisAnswerCorrect && (
+                <span id={`answer-feedback-${optionIndex}`} aria-live="polite">
+                  Correct!
+                </span>
+              )}
+              {!isThisAnswerCorrect && isThisAnswerSelected && (
+                <span id={`answer-feedback-${optionIndex}`} aria-live="polite">
+                  Incorrect
+                </span>
+              )}
+            </div>
+          );
+        })}
+        <button onClick={handleNextQuestion} disabled={selectedAnswer === null}>
+          {currentQuestion === accessibilityQuiz.questions.length - 1
+            ? "View result"
+            : "Next question"}
+        </button>
+      </div>
       {currentQuestion === accessibilityQuiz.questions.length - 1 && (
         <div>
           <h2>
@@ -70,7 +93,7 @@ const Accessibility = () => {
           </h2>
         </div>
       )}
-    </div>
+    </section>
   );
 };
 
