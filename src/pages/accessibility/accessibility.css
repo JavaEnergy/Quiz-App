@@ -56,3 +56,11 @@
 .red {
   border: 1px solid red;
 }
+.purple {
+  border: 1px solid #A729F5
+  ;
+
+}
+.inactive {
+  opacity: 50%;
+}

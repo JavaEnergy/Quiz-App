@@ -36,12 +36,14 @@ const Css = () => {
   const { question, options } = cssQuiz.questions[currentQuestion];
 
   return (
-    <div>
-      <p>
-        Question {currentQuestion + 1} of {cssQuiz.questions.length}
-      </p>
-      <p>{question}</p>
-      <ul>
+    <div className="quiz-page">
+      <div className="question-div">
+        <p>
+          Question {currentQuestion + 1} of {cssQuiz.questions.length}
+        </p>
+        <p className="quest">{question}</p>
+      </div>
+      <div className="answers">
         {options.map((option, optionIndex) => (
           <li key={optionIndex}>
             <input
@@ -53,7 +55,7 @@ const Css = () => {
             {option}
           </li>
         ))}
-      </ul>
+      </div>
       <button onClick={handleNextQuestion} disabled={selectedAnswer === null}>
         {currentQuestion === cssQuiz.questions.length - 1
           ? "View result"
