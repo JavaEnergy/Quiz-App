@@ -1,89 +1,120 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 import { quizzes } from "../../../data.json";
+import "./css.css"; // Using the same CSS file for consistency
 
 const Css = () => {
-  // Access the CSS quiz data
   const cssQuiz = quizzes.find((quiz) => quiz.title === "CSS");
 
-  // State variables for current question, selected answer, and score
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [score, setScore] = useState(0);
+  const [isCorrect, setIsCorrect] = useState(null);
+  const [submitted, setSubmitted] = useState(false);
 
   const handleAnswerSelect = (optionIndex) => {
-    // Retrieve the correct answer from the question data
-    const correctAnswer = cssQuiz.questions[currentQuestion].answer;
+    if (!submitted) {
+      setSelectedAnswer(optionIndex);
+    }
+  };
 
-    // Update score only if the selected answer is correct
-    const isCorrect =
-      optionIndex ===
-      cssQuiz.questions[currentQuestion].options.indexOf(correctAnswer);
-    setScore(isCorrect ? score + 1 : score);
-
-    // Update selected answer for feedback
-    setSelectedAnswer(optionIndex);
+  const handleSubmitAnswer = () => {
+    if (selectedAnswer !== null) {
+      const correctAnswerIndex = cssQuiz.questions[currentQuestion].options.indexOf(
+        cssQuiz.questions[currentQuestion].answer
+      );
+      const isAnswerCorrect = selectedAnswer === correctAnswerIndex;
+      setIsCorrect(isAnswerCorrect);
+      setScore(isAnswerCorrect ? score + 1 : score);
+      setSubmitted(true);
+    }
   };
 
   const handleNextQuestion = () => {
     if (currentQuestion < cssQuiz.questions.length - 1) {
       setCurrentQuestion(currentQuestion + 1);
-      setSelectedAnswer(null); // Reset selected answer for new question
+      setSelectedAnswer(null);
+      setIsCorrect(null);
+      setSubmitted(false);
     }
   };
 
-  // Access question and options for the current question
   const { question, options } = cssQuiz.questions[currentQuestion];
+  
+  if (currentQuestion === cssQuiz.questions.length - 1 && submitted) {
+    return (
+      <section className="score-page">
+        <div className="result-text">
+          <h1>Quiz Completed</h1>
+          <h1>You scored...</h1>
+        </div>
+        <div className="result-score">
+          <h2>Your final score:</h2>
+          <h1>{score}</h1>
+          <h2>out of {cssQuiz.questions.length}</h2>
+        </div>
+        <button>Play Again</button>
+      </section>
+    );
+  }
 
   return (
-    <div className="quiz-page">
+    <section className="quiz-page">
       <div className="question-div">
-        <p>
+        <p className="quest-count">
           Question {currentQuestion + 1} of {cssQuiz.questions.length}
         </p>
         <p className="quest">{question}</p>
       </div>
       <div className="answers">
-        {options.map((option, optionIndex) => (
-          <li key={optionIndex}>
-            <input
-              type="radio"
-              name="answer"
-              checked={selectedAnswer === optionIndex}
-              onChange={() => handleAnswerSelect(optionIndex)}
-            />
-            {option}
-          </li>
-        ))}
+        {options.map((option, optionIndex) => {
+          const isThisAnswerSelected = selectedAnswer === optionIndex;
+          const isThisAnswerCorrect = submitted && isThisAnswerSelected && option === cssQuiz.questions[currentQuestion].answer;
+          const correctAnswerIndex = cssQuiz.questions[currentQuestion].options.indexOf(
+            cssQuiz.questions[currentQuestion].answer
+          );
+
+          let className = "answer";
+          if (submitted) {
+            if (isThisAnswerCorrect || optionIndex === correctAnswerIndex) {
+              className += " green";
+            } else if (isThisAnswerSelected) {
+              className += " red";
+            }
+          } else if (isThisAnswerSelected) {
+            className += " purple";
+          }
+
+          return (
+            <div
+              key={`answer-${optionIndex}`}
+              className={className}
+              onClick={() => handleAnswerSelect(optionIndex)}
+              aria-describedby={`answer-feedback-${optionIndex}`}
+            >
+              <label
+                htmlFor={`answer-${optionIndex}`}
+                style={isThisAnswerSelected ? { backgroundColor: '#A729F5', color: 'white' } : {}}
+              >
+                {String.fromCharCode(65 + optionIndex)}
+              </label>
+              {option}
+              {submitted && (isThisAnswerCorrect || optionIndex === correctAnswerIndex) && (
+                <span id={`answer-feedback-${optionIndex}`} aria-live="polite">Correct!</span>
+              )}
+            </div>
+          );
+        })}
+        {!submitted ? (
+          <button onClick={handleSubmitAnswer} disabled={selectedAnswer === null} className={`${selectedAnswer === null ? "inactive" : ""}`}>
+            Submit Answer
+          </button>
+        ) : (
+          <button onClick={handleNextQuestion}>
+            Next Question
+          </button>
+        )}
       </div>
-      <button onClick={handleNextQuestion} disabled={selectedAnswer === null}>
-        {currentQuestion === cssQuiz.questions.length - 1
-          ? "View result"
-          : "Next question"}
-      </button>
-
-      {/* Display feedback only after an answer is selected */}
-      {selectedAnswer !== null && (
-        <div>
-          {selectedAnswer === cssQuiz.questions[currentQuestion].answerIndex ? (
-            <p>Correct!</p>
-          ) : (
-            <p>
-              Incorrect. The correct answer is:{" "}
-              {options[cssQuiz.questions[currentQuestion].answerIndex]}.
-            </p>
-          )}
-        </div>
-      )}
-
-      {currentQuestion === cssQuiz.questions.length - 1 && (
-        <div>
-          <h2>
-            Your score: {score} / {cssQuiz.questions.length}
-          </h2>
-        </div>
-      )}
-    </div>
+    </section>
   );
 };
 

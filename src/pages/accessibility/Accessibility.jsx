@@ -42,9 +42,17 @@ const Accessibility = () => {
   
   if (currentQuestion === accessibilityQuiz.questions.length - 1 && submitted) {
     return (
-      <section className="quiz-page">
+      <section className="score-page">
+        <div className="result-text">
         <h1>Quiz Completed</h1>
-        <h2>Your final score: {score} / {accessibilityQuiz.questions.length}</h2>
+        <h1>You scored...</h1>
+        </div>
+      <div className="result-score">
+      <h2>Your final score:</h2>
+      <h1>{score} </h1>
+      <h2>out of {accessibilityQuiz.questions.length}</h2>
+      </div>
+      <button>Play Again</button>
       </section>
     );
   }
@@ -65,31 +73,27 @@ const Accessibility = () => {
             accessibilityQuiz.questions[currentQuestion].answer
           );
 
-          let backgroundColor;
+          let className = "answer";
           if (submitted) {
-            if (isThisAnswerCorrect) {
-              backgroundColor = '#26D782'; // bg-correct
+            if (isThisAnswerCorrect || optionIndex === correctAnswerIndex) {
+              className += " green";
             } else if (isThisAnswerSelected) {
-              backgroundColor = '#EE5454'; // bg-incorrect
-            } else if (optionIndex === correctAnswerIndex) {
-              backgroundColor = '#26D782'; // bg-correct for the correct answer
+              className += " red";
             }
           } else if (isThisAnswerSelected) {
-            backgroundColor = '#A729F5'; // bg-active
+            className += " purple";
           }
 
           return (
-            
             <div
               key={`answer-${optionIndex}`}
-              className="answer"
+              className={className}
               onClick={() => handleAnswerSelect(optionIndex)}
               aria-describedby={`answer-feedback-${optionIndex}`}
-              
             >
               <label
                 htmlFor={`answer-${optionIndex}`}
-                style={{ backgroundColor }}
+                style={isThisAnswerSelected ? { backgroundColor: '#A729F5', color: 'white' } : {}}
               >
                 {String.fromCharCode(65 + optionIndex)}
               </label>
