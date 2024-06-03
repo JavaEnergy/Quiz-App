@@ -4,6 +4,7 @@ import "./header.css";
 function Header({ mode, toggleMode }) {
   return (
     <header>
+      
       <div className="mode-toggle-button" onClick={toggleMode}>
         <span className={mode === "light" ? "icon sun-icon" : "icon moon-icon"} />
         <div className={`toggle ${mode}`}>

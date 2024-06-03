@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { quizzes } from "../../../data.json";
 import "./css.css"; // Using the same CSS file for consistency
+import useThemeStore from "../../store/themeStore"; // Import the theme store
 
 const Css = () => {
   const cssQuiz = quizzes.find((quiz) => quiz.title === "CSS");
@@ -10,6 +11,8 @@ const Css = () => {
   const [score, setScore] = useState(0);
   const [isCorrect, setIsCorrect] = useState(null);
   const [submitted, setSubmitted] = useState(false);
+
+  const { mode } = useThemeStore(); // Use the mode from the theme store
 
   const handleAnswerSelect = (optionIndex) => {
     if (!submitted) {
@@ -42,12 +45,12 @@ const Css = () => {
   
   if (currentQuestion === cssQuiz.questions.length - 1 && submitted) {
     return (
-      <section className="score-page">
+      <section className={`score-page ${mode === "light" ? "" : "dark-mode-div"}`}>
         <div className="result-text">
           <h1>Quiz Completed</h1>
           <h1>You scored...</h1>
         </div>
-        <div className="result-score">
+        <div className={`result-score ${mode === "light" ? "" : "dark-mode-div"}`}>
           <h2>Your final score:</h2>
           <h1>{score}</h1>
           <h2>out of {cssQuiz.questions.length}</h2>
@@ -58,14 +61,16 @@ const Css = () => {
   }
 
   return (
-    <section className="quiz-page">
-      <div className="question-div">
+    <section className={`quiz-page ${mode === "light" ? "" : "dark-mode-div"}`}>
+      <div className={`question-div ${mode === "light" ? "" : "dark-mode-p"}`}>
         <p className="quest-count">
           Question {currentQuestion + 1} of {cssQuiz.questions.length}
         </p>
-        <p className="quest">{question}</p>
+        <p className={`quest ${mode === "light" ? "" : "dark-mode-p"}`}>
+          {question}
+        </p>
       </div>
-      <div className="answers">
+      <div className={`answers ${mode === "light" ? "" : "dark-mode-p"}`}>
         {options.map((option, optionIndex) => {
           const isThisAnswerSelected = selectedAnswer === optionIndex;
           const isThisAnswerCorrect = submitted && isThisAnswerSelected && option === cssQuiz.questions[currentQuestion].answer;
@@ -73,7 +78,7 @@ const Css = () => {
             cssQuiz.questions[currentQuestion].answer
           );
 
-          let className = "answer";
+          let className = `answer ${mode === "light" ? "" : "dark-mode-div"}`;
           if (submitted) {
             if (isThisAnswerCorrect || optionIndex === correctAnswerIndex) {
               className += " green";
@@ -105,11 +110,11 @@ const Css = () => {
           );
         })}
         {!submitted ? (
-          <button onClick={handleSubmitAnswer} disabled={selectedAnswer === null} className={`${selectedAnswer === null ? "inactive" : ""}`}>
+          <button onClick={handleSubmitAnswer} disabled={selectedAnswer === null} className={`${selectedAnswer === null ? "inactive" : ""} ${mode === "light" ? "" : "dark-mode-div"}`}>
             Submit Answer
           </button>
         ) : (
-          <button onClick={handleNextQuestion}>
+          <button onClick={handleNextQuestion} className={`${mode === "light" ? "" : "dark-mode-div"}`}>
             Next Question
           </button>
         )}
