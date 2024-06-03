@@ -1,3 +1,70 @@
 header {
   padding: 28px 24px;
 }
+.header {
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px;
+}
+
+.mode-toggle-button {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.icon {
+  width: 24px;
+  height: 24px;
+  background-size: contain;
+  margin: 0 10px;
+}
+
+.sun-icon {
+  background-image: url('/src/assets/images/icon-sun-dark.svg');
+}
+
+.moon-icon {
+  background-image: url('/src/assets/images/icon-sun-light.svg');
+}
+.sun {
+  background-image: url('/src/assets/images/icon-moon-dark.svg');
+}
+
+.moon{
+  background-image: url('/src/assets/images/icon-moon-light.svg');
+}
+
+.toggle {
+  width: 40px;
+  height: 20px;
+  background-color: #ccc;
+  border-radius: 10px;
+  position: relative;
+  transition: background-color 0.3s;
+}
+
+.toggle.light {
+  background-color: #8e44ad;
+}
+
+.toggle.dark {
+  background-color: #34495e;
+}
+
+.toggle-circle {
+  width: 18px;
+  height: 18px;
+  background-color: #fff;
+  border-radius: 50%;
+  position: absolute;
+  top: 1px;
+  left: 1px;
+  transition: left 0.3s;
+}
+
+.toggle.dark .toggle-circle {
+  left: 21px;
+}

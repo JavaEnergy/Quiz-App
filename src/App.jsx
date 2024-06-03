@@ -12,9 +12,7 @@ import "./App.css";
 const App = () => {
   const { mode, toggleMode } = useThemeStore();
   return (
-    <div
-      className={`background ${mode === "light" ? "light-mode" : "dark-mode"}`}
-    >
+    <div className={`background ${mode === "light" ? "light-mode" : "dark-mode"}`}>
       <Header mode={mode} toggleMode={toggleMode} />
       <Router>
         <Routes>

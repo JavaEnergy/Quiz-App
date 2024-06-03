@@ -1,5 +1,6 @@
 .background {
   background-position: center;
+  height: 100vh;
 }
 
 .light-mode {
@@ -14,4 +15,9 @@
   background-color: #313e51;
   color: #fff;  overflow: hidden;
 
+}
+
+
+.app {
+  transition: background-color 0.3s, color 0.3s;
 }
