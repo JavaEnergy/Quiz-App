@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { quizzes } from "../../../data.json";
 import "./accessibility.css";
 import useThemeStore from "../../store/themeStore"; // Import the theme store
+import ProgressBar from "../../assets/components/ProgressBar"; // Import the ProgressBar component
 
 const Accessibility = () => {
   const accessibilityQuiz = quizzes.find((quiz) => quiz.title === "Accessibility");
@@ -62,6 +63,7 @@ const Accessibility = () => {
 
   return (
     <section className={`quiz-page ${mode === "light" ? "" : "dark-mode-div"}`}>
+      <ProgressBar current={currentQuestion + (submitted ? 1 : 0)} total={accessibilityQuiz.questions.length} />
       <div className={`question-div ${mode === "light" ? "" : "dark-mode-p"}`}>
         <p className="quest-count">
           Question {currentQuestion + 1} of {accessibilityQuiz.questions.length}
