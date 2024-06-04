@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { quizzes } from "../../../data.json";
 import "./css.css"; // Using the same CSS file for consistency
 import useThemeStore from "../../store/themeStore"; // Import the theme store
+import ProgressBar from "../../assets/components/ProgressBar"; // Import the ProgressBar component
+import { useNavigate } from "react-router-dom"; // Import useNavigate
 
 const Css = () => {
   const cssQuiz = quizzes.find((quiz) => quiz.title === "CSS");
@@ -41,6 +43,21 @@ const Css = () => {
     }
   };
 
+  
+  const handlePlayAgain = () => {
+    // Reset all state variables to start the quiz again
+    setCurrentQuestion(0);
+    setSelectedAnswer(null);
+    setScore(0);
+    setIsCorrect(null);
+    setSubmitted(false);
+  };
+  const navigate = useNavigate(); // Get the navigate function
+  const handleHome = () => {
+    navigate("/"); // Navigate to the home route
+  };
+
+
   const { question, options } = cssQuiz.questions[currentQuestion];
   
   if (currentQuestion === cssQuiz.questions.length - 1 && submitted) {
@@ -55,13 +72,15 @@ const Css = () => {
           <h1>{score}</h1>
           <h2>out of {cssQuiz.questions.length}</h2>
         </div>
-        <button>Play Again</button>
-      </section>
+        <button onClick={handlePlayAgain}>Play Again</button>
+        <button onClick={handleHome}>Home</button>      </section>
     );
   }
 
   return (
     <section className={`quiz-page ${mode === "light" ? "" : "dark-mode-div"}`}>
+            <ProgressBar current={currentQuestion + (submitted ? 1 : 0)} total={cssQuiz.questions.length} />
+
       <div className={`question-div ${mode === "light" ? "" : "dark-mode-p"}`}>
         <p className="quest-count">
           Question {currentQuestion + 1} of {cssQuiz.questions.length}

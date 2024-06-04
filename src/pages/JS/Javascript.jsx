@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import { quizzes } from "../../../data.json";
 import "./javascript.css"; // Using the same CSS file for consistency
 import useThemeStore from "../../store/themeStore"; // Import the theme store
+import ProgressBar from "../../assets/components/ProgressBar"; // Import the ProgressBar component
+import { useNavigate } from "react-router-dom"; // Import useNavigate
+
 
 const Js = () => {
   const jsQuiz = quizzes.find((quiz) => quiz.title === "JavaScript");
@@ -30,6 +33,22 @@ const Js = () => {
       setScore(isAnswerCorrect ? score + 1 : score);
       setSubmitted(true);
     }
+
+  
+    
+  };
+
+  const handlePlayAgain = () => {
+    // Reset all state variables to start the quiz again
+    setCurrentQuestion(0);
+    setSelectedAnswer(null);
+    setScore(0);
+    setIsCorrect(null);
+    setSubmitted(false);
+  };
+  const navigate = useNavigate(); // Get the navigate function
+  const handleHome = () => {
+    navigate("/"); // Navigate to the home route
   };
 
   const handleNextQuestion = () => {
@@ -55,13 +74,15 @@ const Js = () => {
           <h1>{score}</h1>
           <h2>out of {jsQuiz.questions.length}</h2>
         </div>
-        <button>Play Again</button>
+        <button onClick={handlePlayAgain}>Play Again</button>
+        <button onClick={handleHome}>Home</button>
       </section>
     );
   }
 
   return (
     <section className={`quiz-page ${mode === "light" ? "" : "dark-mode-div"}`}>
+        <ProgressBar current={currentQuestion + (submitted ? 1 : 0)} total={jsQuiz.questions.length} />
       <div className={`question-div ${mode === "light" ? "" : "dark-mode-p"}`}>
         <p className="quest-count">
           Question {currentQuestion + 1} of {jsQuiz.questions.length}
