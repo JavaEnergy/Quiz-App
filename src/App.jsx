@@ -13,14 +13,14 @@ const App = () => {
   const { mode, toggleMode } = useThemeStore();
   return (
     <div className={`background ${mode === "light" ? "light-mode" : "dark-mode"}`}>
-      <Header mode={mode} toggleMode={toggleMode} />
       <Router>
+        <Header mode={mode} toggleMode={toggleMode} />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="quiz/HTML" element={<Html />} />
-          <Route path="quiz/Css" element={<Css />} />
-          <Route path="quiz/Accessibility" element={<Accessibility />} />
-          <Route path="quiz/Javascript" element={<Javascript />} />
+          <Route path="quiz/html" element={<Html />} />
+          <Route path="quiz/css" element={<Css />} />
+          <Route path="quiz/accessibility" element={<Accessibility />} />
+          <Route path="quiz/javascript" element={<Javascript />} />
         </Routes>
       </Router>
     </div>
