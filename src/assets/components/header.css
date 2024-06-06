@@ -1,11 +1,18 @@
 header {
   padding: 28px 24px;
 }
+
 .header {
   display: flex;
-  justify-content: flex-end; /* Adjusted for logo and toggle button */
-  align-items: center; /* Align items vertically center */
+  justify-content: flex-end;
+  align-items: center;
   padding: 10px;
+  padding-top: 40px;
+}
+
+.header-with-logo {
+  justify-content: space-around;
+  font-family: Rublik-400;
 }
 
 .mode-toggle-button {
@@ -67,3 +74,8 @@ header {
 .toggle.dark .toggle-circle {
   left: 21px;
 }
+
+.logo-container {
+  display: flex;
+  align-items: center;
+gap: 10px;}
