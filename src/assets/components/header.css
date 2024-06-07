@@ -79,3 +79,19 @@ header {
   display: flex;
   align-items: center;
 gap: 10px;}
+
+@media  (min-width: 768px) {
+
+
+.logo-text {
+  font-size: 28px;
+}
+
+}
+
+@media  (min-width: 1300px) {
+  .header {
+    margin: 0 140px;
+
+  }
+}

@@ -65,6 +65,7 @@ const Accessibility = () => {
           <h1>Quiz Completed</h1>
           <h1>You scored...</h1>
         </div>
+        <div className="score">
         <div className={`result-score ${mode === "light" ? "" : "dark-mode-div"}`}>
           <h2>Your final score:</h2>
           <h1>{score}</h1>
@@ -72,14 +73,13 @@ const Accessibility = () => {
         </div>
         <button onClick={handlePlayAgain}>Play Again</button>
         <button onClick={handleHome}>Home</button>
-
+        </div>
       </section>
     );
   }
 
   return (
     <section className={`quiz-page ${mode === "light" ? "" : "dark-mode-div"}`}>
-      <ProgressBar current={currentQuestion + (submitted ? 1 : 0)} total={accessibilityQuiz.questions.length} />
       <div className={`question-div ${mode === "light" ? "" : "dark-mode-p"}`}>
         <p className="quest-count">
           Question {currentQuestion + 1} of {accessibilityQuiz.questions.length}
@@ -87,6 +87,7 @@ const Accessibility = () => {
         <p className={`quest ${mode === "light" ? "" : "dark-mode-p"}`}>
           {question}
         </p>
+        <ProgressBar current={currentQuestion + (submitted ? 1 : 0)} total={accessibilityQuiz.questions.length} />
       </div>
       <div className={`answers ${mode === "light" ? "" : "dark-mode-p"}`}>
         {options.map((option, optionIndex) => {

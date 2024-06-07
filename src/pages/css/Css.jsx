@@ -67,19 +67,19 @@ const Css = () => {
           <h1>Quiz Completed</h1>
           <h1>You scored...</h1>
         </div>
+        <div className="score">
         <div className={`result-score ${mode === "light" ? "" : "dark-mode-div"}`}>
           <h2>Your final score:</h2>
           <h1>{score}</h1>
           <h2>out of {cssQuiz.questions.length}</h2>
         </div>
         <button onClick={handlePlayAgain}>Play Again</button>
-        <button onClick={handleHome}>Home</button>      </section>
+        <button onClick={handleHome}>Home</button>    </div>   </section>
     );
   }
 
   return (
     <section className={`quiz-page ${mode === "light" ? "" : "dark-mode-div"}`}>
-            <ProgressBar current={currentQuestion + (submitted ? 1 : 0)} total={cssQuiz.questions.length} />
 
       <div className={`question-div ${mode === "light" ? "" : "dark-mode-p"}`}>
         <p className="quest-count">
@@ -88,6 +88,8 @@ const Css = () => {
         <p className={`quest ${mode === "light" ? "" : "dark-mode-p"}`}>
           {question}
         </p>
+        <ProgressBar current={currentQuestion + (submitted ? 1 : 0)} total={cssQuiz.questions.length} />
+
       </div>
       <div className={`answers ${mode === "light" ? "" : "dark-mode-p"}`}>
         {options.map((option, optionIndex) => {

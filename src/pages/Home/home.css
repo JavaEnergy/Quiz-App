@@ -181,3 +181,30 @@ font-family: Rubik;
 font-size: 18px;
 font-weight: 500;
 }
+
+@media  (min-width: 768px) {
+  .home {
+   margin: 0 64px;
+  }
+  .text h1 {
+    font-size: 64px;
+  }
+  .quiz-list {
+    font-size:28px ;
+  }
+}
+
+@media  (min-width: 1300px) {
+  .home {
+   margin:  140px;
+   display: grid;
+   grid-template-columns: repeat(2, 1fr);
+   grid-template-rows: 1fr;
+
+  }
+
+  .quiz-list {
+    padding: 0;
+  }
+
+}

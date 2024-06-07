@@ -67,20 +67,20 @@ const Html = () => {
           <h1>Quiz Completed</h1>
           <h1>You scored...</h1>
         </div>
+        <div className="score"> 
         <div className={`result-score ${mode === "light" ? "" : "dark-mode-div"}`}>
           <h2>Your final score:</h2>
           <h1>{score}</h1>
           <h2>out of {htmlQuiz.questions.length}</h2>
         </div>
         <button onClick={handlePlayAgain}>Play Again</button>
-        <button onClick={handleHome}>Home</button>
+        <button onClick={handleHome}>Home</button> </div>
       </section>
     );
   }
 
   return (
     <section className={`quiz-page ${mode === "light" ? "" : "dark-mode-div"}`}>
-            <ProgressBar current={currentQuestion + (submitted ? 1 : 0)} total={htmlQuiz.questions.length} />
       <div className={`question-div ${mode === "light" ? "" : "dark-mode-p"}`}>
         <p className="quest-count">
           Question {currentQuestion + 1} of {htmlQuiz.questions.length}
@@ -88,6 +88,8 @@ const Html = () => {
         <p className={`quest ${mode === "light" ? "" : "dark-mode-p"}`}>
           {question}
         </p>
+        <ProgressBar current={currentQuestion + (submitted ? 1 : 0)} total={htmlQuiz.questions.length} />
+
       </div>
       <div className={`answers ${mode === "light" ? "" : "dark-mode-p"}`}>
         {options.map((option, optionIndex) => {

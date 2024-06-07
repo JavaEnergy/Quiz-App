@@ -21,3 +21,24 @@
 .app {
   transition: background-color 0.3s, color 0.3s;
 }
+
+@media  (min-width: 768px) {
+
+  .light-mode {
+    background-image: url("/src/assets/images/pattern-background-tablet-light.svg");
+  }
+  .dark-mode {
+    background-image: url("/src/assets/images/pattern-background-tablet-dark.svg");
+  }
+}
+
+@media  (min-width: 1300px) {
+
+  .light-mode {
+    background-image: url("/src/assets/images/pattern-background-desktop-light.svg");
+  }
+  .dark-mode {
+    background-image: url("/src/assets/images/pattern-background-desktop-dark.svg");
+  }
+}
+
